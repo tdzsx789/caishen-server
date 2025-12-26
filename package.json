@@ -1,0 +1,35 @@
+{
+  "name": "caishen-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "start:prod": "node dist/index.js",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "http-status": "^2.1.0",
+    "joi": "^18.0.2",
+    "mongoose": "^9.0.2",
+    "morgan": "^1.10.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/helmet": "^0.0.48",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^25.0.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
