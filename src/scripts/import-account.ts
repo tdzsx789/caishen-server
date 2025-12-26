@@ -1,3 +1,7 @@
+// ==========================================
+// [注意] 此文件是旧的本地脚本，已被废弃。
+// 新的 API 业务逻辑（已实现从 POST Body 读取数据）位于: src/controllers/account.controller.ts
+// ==========================================
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 

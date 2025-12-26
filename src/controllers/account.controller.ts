@@ -8,12 +8,20 @@ const createAccount = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.body;
 
   // Check if account with same ID already exists
-  if (await Account.findOne({ id })) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Account with this ID already exists');
+  const existingAccount = await Account.findOne({ id });
+  if (existingAccount) {
+    res.status(httpStatus.OK).send({
+      message: '账户已存在，跳过创建账户',
+      data: existingAccount
+    });
+    return;
   }
 
   const account = await Account.create(req.body);
-  res.status(httpStatus.CREATED).send(account);
+  res.status(httpStatus.CREATED).send({
+    message: '创建账户成功',
+    data: account
+  });
 });
 
 const getAccounts = catchAsync(async (req: Request, res: Response) => {
