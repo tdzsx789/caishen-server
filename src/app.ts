@@ -26,7 +26,12 @@ app.use(express.urlencoded({ extended: true }));
 
 // enable cors
 app.use(cors({
-  origin: true, // Allow all origins (or specify your frontend URL e.g., 'http://localhost:8000')
+  origin: function (origin, callback) {
+    // 允许没有 origin 的请求（例如移动端 APP 或 curl 请求）
+    if (!origin) return callback(null, true);
+    // 允许所有来源（或者你可以指定具体的域名数组，如 ['http://13.212.168.127', 'http://localhost:8000']）
+    return callback(null, true);
+  },
   credentials: true, // Important: Allow cookies to be sent
 }));
 
