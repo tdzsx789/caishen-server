@@ -3,6 +3,8 @@ import helmet from 'helmet';
 import cors from 'cors';
 import httpStatus from 'http-status';
 import morgan from 'morgan';
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
 import routes from './routes';
 import ApiError from './utils/ApiError';
 import config from './config/config';
@@ -23,7 +25,27 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // enable cors
-app.use(cors());
+app.use(cors({
+  origin: true, // Allow all origins (or specify your frontend URL e.g., 'http://localhost:8000')
+  credentials: true, // Important: Allow cookies to be sent
+}));
+
+// session configuration
+app.use(
+  session({
+    secret: 'caishen-server-secret-key', // In production, this should be in .env
+    resave: false,
+    saveUninitialized: false, // Fix 1: Only save session when data is modified
+    store: MongoStore.create({
+      mongoUrl: config.mongoose.url,
+      collectionName: 'sessions',
+      ttl: 30 * 24 * 60 * 60, // 30 days
+    }),
+    cookie: {
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+    },
+  })
+);
 
 // v1 api routes
 app.use('/api', routes);
