@@ -5,6 +5,9 @@ export interface IAccount extends Document {
   avatar?: string;
   id: string;
   balance: number;
+  total_bets: number;
+  total_income: number;
+  win_rate: number;
 }
 
 const accountSchema = new mongoose.Schema<IAccount>(
@@ -25,6 +28,18 @@ const accountSchema = new mongoose.Schema<IAccount>(
       trim: true,
     },
     balance: {
+      type: Number,
+      default: 0,
+    },
+    total_bets: {
+      type: Number,
+      default: 0,
+    },
+    total_income: {
+      type: Number,
+      default: 0,
+    },
+    win_rate: {
       type: Number,
       default: 0,
     },

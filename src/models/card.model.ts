@@ -15,7 +15,8 @@ export interface ICard extends Document {
   options?: {
     name: string;
     tradingVolume: number;
-    chance: number;
+    yes: number;
+    no: number;
     price: number;
   }[];
   category: string;
@@ -23,7 +24,7 @@ export interface ICard extends Document {
   periodType: string;
 }
 
-const cardSchema = new mongoose.Schema<ICard>(
+export const cardSchema = new mongoose.Schema<ICard>(
   {
     key: {
       type: String,
@@ -65,17 +66,18 @@ const cardSchema = new mongoose.Schema<ICard>(
     },
     rise: {
       type: Number,
-      default: 0,
+      default: 50,
     },
     fall: {
       type: Number,
-      default: 0,
+      default: 50,
     },
     options: [{
       name: { type: String, required: true },
       tradingVolume: { type: Number, default: 0 },
-      chance: { type: Number, default: 0 },
-      price: { type: Number, default: 0 }
+      yes: { type: Number, default: 50 },
+      no: { type: Number, default: 50 },
+      price: { type: Number, default: 50 }
     }],
     category: {
       type: String,

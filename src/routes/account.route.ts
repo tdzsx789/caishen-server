@@ -17,6 +17,9 @@ const createAccountSchema = {
       'any.required': 'ID is required',
     }),
     balance: Joi.number().default(0),
+    total_bets: Joi.number().default(0),
+    total_income: Joi.number().default(0),
+    win_rate: Joi.number().default(0),
   }),
 };
 
@@ -24,5 +27,23 @@ router
   .route('/')
   .post(validate(createAccountSchema), accountController.createAccount)
   .get(accountController.getAccounts);
+
+const updateAccountSchema = {
+  params: Joi.object().keys({
+    accountId: Joi.string().required(),
+  }),
+  body: Joi.object().keys({
+    name: Joi.string(),
+    avatar: Joi.string().allow(''),
+    balance: Joi.number(),
+    total_bets: Joi.number(),
+    total_income: Joi.number(),
+    win_rate: Joi.number(),
+  }).min(1),
+};
+
+router
+  .route('/:accountId')
+  .patch(validate(updateAccountSchema), accountController.updateAccount);
 
 export default router;

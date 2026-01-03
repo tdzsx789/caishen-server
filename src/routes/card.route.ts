@@ -8,6 +8,10 @@ router
   .get(cardController.getCards);
 
 router
+  .route('/updateCardData')
+  .post(cardController.updateCardData);
+
+router
   .route('/:cardId')
   .patch(cardController.updateCard);
 

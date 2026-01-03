@@ -154,16 +154,17 @@ const initCards = async () => {
           tradingVolume: 0,
           endTime: endTimeStr,
           startTime: startTimeStr,
-          rise: 0,
-          fall: 0,
+          rise: 50,
+          fall: 50,
           category: activeCategory,
           subType: 'multiple',
           periodType: 'hour',
           options: multipleOptions.map(name => ({
             name,
             tradingVolume: 0,
-            chance: 0,
-            price: 0
+            yes: 50,
+            no: 50,
+            price: 50
           }))
         });
     }
@@ -191,16 +192,17 @@ const initCards = async () => {
           tradingVolume: 0,
           endTime: `${dateStr} 24:00:00`,
           startTime: `${dateStr} 00:00:00`,
-          rise: 0,
-          fall: 0,
+          rise: 50,
+          fall: 50,
           category: activeCategory,
           subType: 'multiple',
           periodType: 'day',
           options: multipleOptions.map(name => ({
             name,
             tradingVolume: 0,
-            chance: 0,
-            price: 0
+            yes: 50,
+            no: 50,
+            price: 50
           }))
         });
     }
@@ -224,16 +226,17 @@ const initCards = async () => {
           tradingVolume: 0,
           endTime: `${year}-${MM}-${lastDay} 24:00:00`,
           startTime: `${year}-${MM}-01 00:00:00`,
-          rise: 0,
-          fall: 0,
+          rise: 50,
+          fall: 50,
           category: activeCategory,
           subType: 'multiple',
           periodType: 'month',
           options: multipleOptions.map(name => ({
             name,
             tradingVolume: 0,
-            chance: 0,
-            price: 0
+            yes: 50,
+            no: 50,
+            price: 50
           }))
         });
     }
@@ -250,16 +253,17 @@ const initCards = async () => {
       tradingVolume: 0,
       endTime: `${targetYear}-12-31 24:00:00`,
       startTime: `${targetYear}-01-01 00:00:00`,
-      rise: 0,
-      fall: 0,
+      rise: 50,
+      fall: 50,
       category: activeCategory,
       subType: 'multiple',
       periodType: 'year',
       options: multipleOptions.map(name => ({
         name,
         tradingVolume: 0,
-        chance: 0,
-        price: 0
+        yes: 50,
+        no: 50,
+        price: 50
       }))
     });
   }

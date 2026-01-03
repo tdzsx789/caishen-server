@@ -69,6 +69,8 @@ const getCurrentUser = catchAsync(async (req: Request, res: Response) => {
   res.send({
     success: true,
     data: {
+      id: account.id,
+      username: account.name,
       name: account.name,
       avatar: account.avatar || 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
       userid: account.id,
@@ -87,6 +89,10 @@ const getCurrentUser = catchAsync(async (req: Request, res: Response) => {
       },
       address: '西湖区工专路 77 号',
       phone: '0752-268888888',
+      balance: account.balance,
+      total_bets: account.total_bets,
+      total_income: account.total_income,
+      win_rate: account.win_rate,
     },
     isLogin: true
   });
@@ -110,9 +116,20 @@ const outLogin = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const updateAccount = catchAsync(async (req: Request, res: Response) => {
+  const account = await Account.findOne({ id: req.params.accountId });
+  if (!account) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Account not found');
+  }
+  Object.assign(account, req.body);
+  await account.save();
+  res.send(account);
+});
+
 export default {
   createAccount,
   getAccounts,
   getCurrentUser,
   outLogin,
+  updateAccount,
 };
